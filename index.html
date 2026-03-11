@@ -3,196 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ABT TOOL - 공식 보고서용</title>
+    <title>ABT TOOL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        input[type="number"], input[type="text"] { border-bottom: 1px solid #ccc; background: transparent; text-align: center; font-size: 14px; }
+        input[type="number"], input[type="text"] { border-bottom: 1px solid #ccc; background: transparent; text-align: center; font-size: 16px; width: 45px; }
         input:focus { outline: none; border-color: #3b82f6; }
         .card { background: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 1rem; }
-        .section-title { font-weight: bold; font-size: 15px; margin-bottom: 10px; display: block; color: #1e40af; }
-        .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 13px; }
-        /* 버튼 클릭 피드백 */
+        .section-title { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block; color: #1e40af; }
         button:active { transform: scale(0.98); opacity: 0.9; }
     </style>
 </head>
-<body class="bg-gray-50 p-3 max-w-md mx-auto text-gray-800 pb-20">
+<body class="bg-gray-50 p-3 max-w-md mx-auto text-gray-800 pb-20 font-sans">
 
     <h1 class="text-xl font-black text-center py-4 text-blue-700">ABT TOOL 📊</h1>
 
     <div class="card">
         <div class="flex justify-between items-center mb-3">
             <span class="font-bold text-sm">총 방문업소:</span>
-            <span><input type="number" id="total_shops" value="0" class="w-12"> 개</span>
+            <span><input type="number" id="total_shops" value="0"> 개</span>
         </div>
         <div class="text-xs font-bold text-gray-500 mb-1">📍 상권 선택</div>
         <input type="text" id="area_name" value="광안" class="w-full p-2 border rounded-md mb-3 text-left">
     </div>
 
-    <div class="card border-l-4 border-blue-600">
+    <div class="card border-l-4 border-blue-600 text-xs">
         <span class="section-title">가. 무학 (T)</span>
-        <div class="sub-grid">
-            <div>좋은데이: <input type="number" id="m_good" value="0" class="w-10"></div>
-            <div>톡시리즈: <input type="number" id="m_tok" value="0" class="w-10"></div>
-            <div>부산갈매기: <input type="number" id="m_gal" value="0" class="w-10"></div>
-            <div>기타: <input type="number" id="m_etc" value="0" class="w-10"></div>
+        <div class="grid grid-cols-2 gap-3">
+            <div>좋은데이: <input type="number" id="m_good" value="0"></div>
+            <div>톡시리즈: <input type="number" id="m_tok" value="0"></div>
+            <div>부산갈매기: <input type="number" id="m_gal" value="0"></div>
+            <div>기타: <input type="number" id="m_etc" value="0"></div>
         </div>
     </div>
 
-    <div class="card border-l-4 border-blue-900">
+    <div class="card border-l-4 border-blue-900 text-xs">
         <span class="section-title">나. 하이트진로 (T)</span>
-        <div class="sub-grid">
-            <div>참이슬: <input type="number" id="h_isul" value="0" class="w-10"></div>
-            <div>진로: <input type="number" id="h_jinro" value="0" class="w-10"></div>
-            <div>기타: <input type="number" id="h_etc" value="0" class="w-10"></div>
+        <div class="grid grid-cols-2 gap-3">
+            <div>참이슬: <input type="number" id="h_isul" value="0"></div>
+            <div>진로: <input type="number" id="h_jinro" value="0"></div>
+            <div>기타: <input type="number" id="h_etc" value="0"></div>
         </div>
     </div>
 
-    <div class="card border-l-4 border-teal-600">
+    <div class="card border-l-4 border-teal-600 text-xs">
         <span class="section-title">다. 대선주조 (T)</span>
-        <div class="sub-grid">
-            <div>대선(C1): <input type="number" id="d_daesun" value="0" class="w-10"></div>
-            <div>부산: <input type="number" id="d_busan" value="0" class="w-10"></div>
-            <div>기타: <input type="number" id="d_etc" value="0" class="w-10"></div>
+        <div class="grid grid-cols-2 gap-3">
+            <div>대선(C1): <input type="number" id="d_daesun" value="0"></div>
+            <div class="text-blue-600">부산: <input type="number" id="d_busan" value="0"></div>
+            <div>기타: <input type="number" id="d_etc" value="0"></div>
         </div>
     </div>
 
-    <div class="card border-l-4 border-pink-600">
+    <div class="card border-l-4 border-pink-600 text-xs">
         <span class="section-title">라. 롯데 (T)</span>
-        <div class="sub-grid">
-            <div>새로: <input type="number" id="l_saero" value="0" class="w-10"></div>
-            <div>청하: <input type="number" id="l_chungha" value="0" class="w-10"></div>
-            <div>기타: <input type="number" id="l_etc" value="0" class="w-10"></div>
+        <div class="grid grid-cols-2 gap-3">
+            <div>새로: <input type="number" id="l_saero" value="0"></div>
+            <div>청하: <input type="number" id="l_chungha" value="0"></div>
+            <div>기타: <input type="number" id="l_etc" value="0"></div>
         </div>
     </div>
 
-    <div class="card text-sm">
-        <span class="section-title text-gray-600">마. 기타 주류사 (T)</span>
-        <div>기타합계: <input type="number" id="etc_total" value="0" class="w-12"></div>
+    <div class="card text-xs">
+        <span class="section-title text-gray-400">마. 기타 주류회사 (T)</span>
+        <div>기타합계: <input type="number" id="etc_total" value="0"></div>
     </div>
 
     <div class="card bg-orange-50">
         <span class="section-title text-orange-700">🔄 2. 전환 및 추가주문</span>
         <div id="worker_list" class="space-y-4">
             <div class="worker-item border-b border-orange-200 pb-3">
-                <input type="text" placeholder="근무자 이름" class="worker-name font-bold mb-2 w-24 text-left border-none bg-white px-1" value="김좋은">
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                    <div>[전] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
-                    <div>[추] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
+                <input type="text" placeholder="근무자 이름" class="worker-name font-bold mb-2 w-24 text-left border-none bg-white px-1 shadow-sm rounded" value="김좋은">
+                <div class="grid grid-cols-2 gap-2 text-[10px]">
+                    <div>[전환] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
+                    <div>[추가] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
                 </div>
             </div>
         </div>
-        <button onclick="addWorker()" class="w-full mt-2 text-xs py-1 bg-white border border-orange-300 rounded shadow-sm">+ 근무자 추가</button>
+        <button onclick="addWorker()" class="w-full mt-2 text-xs py-2 bg-white border border-orange-300 rounded shadow-sm">+ 근무자 추가</button>
     </div>
 
     <div class="card text-sm">
-        <span class="section-title text-red-600">3. 타사 활동</span>
+        <span class="section-title text-red-600">3. 타사 활동 / 4. 특이사항</span>
         <div class="space-y-2 mb-3">
             <div>하이트진로: <input type="text" id="act_hite" value="없음" class="w-full text-left"></div>
             <div>대선주조: <input type="text" id="act_daesun" value="없음" class="w-full text-left"></div>
             <div>롯데주류: <input type="text" id="act_lotte" value="없음" class="w-full text-left"></div>
         </div>
-        <span class="section-title text-gray-700">4. 특이사항</span>
-        <textarea id="memo" class="w-full p-2 text-xs border rounded h-20">없음</textarea>
+        <textarea id="memo" class="w-full p-2 text-xs border rounded h-16 bg-gray-50">없음</textarea>
     </div>
 
-    <button onclick="handleCopy()" class="w-full bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg mb-4 active:scale-95 transition">계산 및 양식 복사하기</button>
+    <button onclick="handleCopy()" class="w-full bg-blue-700 text-white font-bold py-5 rounded-xl shadow-lg mb-4">
+        계산 및 양식 복사하기
+    </button>
 
-    <div class="card bg-gray-800 text-green-400 font-mono text-[10px] min-h-[100px]">
+    <div class="card bg-gray-800 text-green-400 font-mono text-[10px] min-h-[120px]">
         <pre id="final_report" class="whitespace-pre-wrap p-2 text-xs">버튼을 눌러주세요.</pre>
     </div>
 
-    <script>
-        function addWorker() {
-            const container = document.getElementById('worker_list');
-            const div = document.createElement('div');
-            div.className = "worker-item border-b border-orange-200 pb-3 mt-3";
-            div.innerHTML = `
-                <input type="text" placeholder="근무자 이름" class="worker-name font-bold mb-2 w-24 text-left border-none bg-white px-1">
-                <div class="grid grid-cols-2 gap-2 text-[11px]">
-                    <div>[전] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
-                    <div>[추] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
-                </div>`;
-            container.appendChild(div);
+<script>
+    function addWorker() {
+        const container = document.getElementById('worker_list');
+        const div = document.createElement('div');
+        div.className = "worker-item border-b border-orange-200 pb-3 mt-3";
+        div.innerHTML = `
+            <input type="text" placeholder="근무자 이름" class="worker-name font-bold mb-2 w-24 text-left border-none bg-white px-1 shadow-sm rounded">
+            <div class="grid grid-cols-2 gap-2 text-[10px]">
+                <div>[전환] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
+                <div>[추가] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
+            </div>`;
+        container.appendChild(div);
+    }
+
+    function handleCopy() {
+        const report = generateReport();
+        if(!report) return;
+
+        const textArea = document.createElement("textarea");
+        textArea.value = report;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
+        document.body.appendChild(textArea);
+        textArea.select();
+        textArea.setSelectionRange(0, 99999);
+
+        try {
+            document.execCommand('copy');
+            alert('✅ 보고서가 복사되었습니다!');
+        } catch (err) {
+            alert('❌ 자동 복사 실패! 하단 미리보기 창을 길게 눌러 복사하세요.');
         }
+        document.body.removeChild(textArea);
+    }
 
-        // 통합 복사 및 계산 함수
-        function handleCopy() {
-            const report = generateReport();
-            if(!report) return;
+    function generateReport() {
+        try {
+            const now = new Date();
+            const days = ['일','월','화','수','목','금','토'];
+            const dateStr = `${now.getMonth()+1}월 ${now.getDate()}일(${days[now.getDay()]})`;
+            const area = document.getElementById('area_name').value;
 
-            // 모바일 복사 필살기 (숨겨진 textarea 활용)
-            const textArea = document.createElement("textarea");
-            textArea.value = report;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-9999px";
-            textArea.style.top = "0";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-            textArea.setSelectionRange(0, 99999);
+            const v = (id) => Number(document.getElementById(id).value || 0);
 
-            try {
-                document.execCommand('copy');
-                alert('✅ 보고서가 복사되었습니다!');
-            } catch (err) {
-                alert('❌ 자동 복사 실패! 아래 검은 창을 길게 눌러주세요.');
-            }
-            document.body.removeChild(textArea);
+            // 1. 점유비 데이터 수집
+            const m = { g: v('m_good'), t: v('m_tok'), ga: v('m_gal'), e: v('m_etc') };
+            const h = { i: v('h_isul'), j: v('h_jinro'), e: v('h_etc') };
+            const d = { c: v('d_daesun'), b: v('d_busan'), e: v('d_etc') };
+            const l = { s: v('l_saero'), c: v('l_chungha'), e: v('l_etc') };
+            const etcTotal = v('etc_total');
+
+            const m_sum = m.g + m.t + m.ga + m.e;
+            const h_sum = h.i + h.j + h.e;
+            const d_sum = d.c + d.b + d.e;
+            const l_sum = l.s + l.c + l.e;
+            const total_T = m_sum + h_sum + d_sum + l_sum + etcTotal;
+
+            const p = (v) => total_T > 0 ? (v / total_T * 100).toFixed(1) : "0.0";
+
+            // 2. 인원 판매량 및 전환 내역 합산 (변수 선언 필수)
+            let workerSalesTxt = "";
+            let transSummaryTxt = "";
+            let addSummaryTxt = "";
+            let total_t_j=0, total_t_g=0, total_t_t=0;
+            let total_a_j=0, total_a_g=0, total_a_t=0;
+
+            document.querySelectorAll('.worker-item').forEach(el => {
+                const name = el.querySelector('.worker-name').value || "미입력";
+                const tj = Number(el.querySelector('.t-good').value || 0);
+                const tg = Number(el.querySelector('.t-gal').value || 0);
+                const tt = Number(el.querySelector('.t-tok').value || 0);
+                const aj = Number(el.querySelector('.a-good').value || 0);
+                const ag = Number(el.querySelector('.a-gal').value || 0);
+                const at = Number(el.querySelector('.a-tok').value || 0);
+
+                total_t_j += tj; total_t_g += tg; total_t_t += tt;
+                total_a_j += aj; total_a_g += ag; total_a_t += at;
+                
+                workerSalesTxt += `${name} : ${tj+tg+tt+aj+ag+at}본\n`;
+                transSummaryTxt += `${name}: ${tj}t(좋은데이) / ${tg}t(부산갈매기) / ${tt}t(톡톡)\n`;
+                addSummaryTxt += `${name}: ${aj}t(좋은데이) / ${ag}t(부산갈매기) / ${at}t(톡톡)\n`;
+            });
+
+            // 3. 최종 양식 조립
+            let r = `< ${dateStr} ${area} 상권 보고 >\n\n`;
+            r += `1. 점유비\n- 총 방문업소: ${v('total_shops')}개\n- 총 테이블 수: ${total_T}T\n\n`;
+            r += `가. 무학: ${m_sum}T (${p(m_sum)}%)\n- 좋은데이: ${m.g}T (${p(m.g)}%)\n- 톡시리즈: ${m.t}T (${p(m.t)}%)\n- 부산갈매기: ${m.ga}T (${p(m.ga)}%)\n- 기타: ${m.e}T (${p(m.e)}%)\n\n`;
+            r += `나. 하이트진로: ${h_sum}T (${p(h_sum)}%)\n- 참이슬: ${h.i}T (${p(h.i)}%)\n- 진로: ${h.j}T (${p(h.j)}%)\n- 기타: ${h.e}T (${p(h.e)}%)\n\n`;
+            r += `다. 대선주조: ${d_sum}T (${p(d_sum)}%)\n- 대선(C1 포함): ${d.c}T (${p(d.c)}%)\n- 부산: ${d.b}T (${p(d.b)}%)\n- 기타: ${d.e}T (${p(d.e)}%)\n\n`;
+            r += `라. 롯데: ${l_sum}T (${p(l_sum)}%)\n- 새로(살구 포함): ${l.s}T (${p(l.s)}%)\n- 청하(별빛청하 포함): ${l.c}T (${p(l.c)}%)\n- 기타: ${l.e}T (${p(l.e)}%)\n\n`;
+            r += `마. 기타 주류회사: ${etcTotal}T (${p(etcTotal)}%)\n※ 별도 제품 확인 시 항목 추가 입력\n\n`;
+            r += `2. 전환 및 추가주문\n\n가. 근무인원\n\n부산 갈매기 총 판매 병 수\n${workerSalesTxt}\n`;
+            r += `나. 총 전환: ${total_t_j}t(좋은데이) / ${total_t_g}t(부산갈매기) / ${total_t_t}t(톡톡)\n${transSummaryTxt}\n`;
+            r += `다. 총 추가주문: ${total_a_j}t(좋은데이) / ${total_a_g}t(부산갈매기) / ${total_a_t}t(톡톡)\n${addSummaryTxt}\n`;
+            r += `3. 타사 활동\n- 하이트진로: ${document.getElementById('act_hite').value}\n- 대선주조: ${document.getElementById('act_daesun').value}\n- 롯데주류: ${document.getElementById('act_lotte').value}\n\n`;
+            r += `4. 특이사항\n- ${document.getElementById('memo').value}`;
+
+            document.getElementById('final_report').innerText = r;
+            return r;
+        } catch(e) { 
+            alert("오류 발생: " + e.message); 
+            return null; 
         }
-
-        function generateReport() {
-            try {
-                const now = new Date();
-                const days = ['일','월','화','수','목','금','토'];
-                const dateStr = `${now.getMonth()+1}월 ${now.getDate()}일(${days[now.getDay()]})`;
-                const area = document.getElementById('area_name').value;
-
-                const gV = (id) => Number(document.getElementById(id).value || 0);
-                const m = { g: gV('m_good'), t: gV('m_tok'), ga: gV('m_gal'), e: gV('m_etc') };
-                const h = { i: gV('h_isul'), j: gV('h_jinro'), e: gV('h_etc') };
-                const d = { c: gV('d_daesun'), b: gV('d_busan'), e: gV('d_etc') };
-                const l = { s: gV('l_saero'), c: gV('l_chungha'), e: gV('l_etc') };
-                const etc = gV('etc_total');
-
-                const m_sum = m.g + m.t + m.ga + m.e;
-                const total = m_sum + h.i + h.j + h.e + d.c + d.b + d.e + l.s + l.c + l.e + etc;
-                const p = (v) => total > 0 ? (v/total*100).toFixed(1) : "0.0";
-
-                let workerTxt = "", transTxt = "", addTxt = "", salesTxt = "";
-                let t_j=0, t_g=0, t_t=0, a_j=0, a_g=0, a_t=0;
-
-                document.querySelectorAll('.worker-item').forEach(el => {
-                    const name = el.querySelector('.worker-name').value || "미입력";
-                    const tj = Number(el.querySelector('.t-good').value || 0);
-                    const tg = Number(el.querySelector('.t-gal').value || 0);
-                    const tt = Number(el.querySelector('.t-tok').value || 0);
-                    const aj = Number(el.querySelector('.a-good').value || 0);
-                    const ag = Number(el.querySelector('.a-gal').value || 0);
-                    const at = Number(el.querySelector('.a-tok').value || 0);
-
-                    t_j+=tj; t_g+=tg; t_t+=tt; a_j+=aj; a_g+=ag; a_t+=at;
-                    salesTxt += `${name} : ${tj+tg+tt+aj+ag+at}본\n`;
-                    transTxt += `${name}: ${tj}t(좋은데이) / ${tg}t(부산갈매기) / ${tt}t(톡톡)\n`;
-                    addTxt += `${name}: ${aj}t(좋은데이) / ${ag}t(부산갈매기) / ${at}t(톡톡)\n`;
-                    workerTxt += `\n${name}: ${tj}t(좋은데이) / ${tg}t(부산갈매기) / ${tt}t(톡톡)`; // 기존 양식 유지용
-                });
-
-                let r = `< ${dateStr} ${area} 상권 보고 >\n\n1. 점유비\n- 총 방문업소: ${gV('total_shops')}개\n- 총 테이블 수: ${total}T\n\n`;
-                r += `가. 무학: ${m_sum}T (${p(m_sum)}%)\n- 좋은데이: ${m.g}T (${p(m.g)}%)\n- 톡시리즈: ${m.t}T (${p(m.t)}%)\n- 부산갈매기: ${m.ga}T (${p(m.ga)}%)\n- 기타: ${m.e}T (${p(m.e)}%)\n\n`;
-                r += `나. 하이트진로: ${h.i+h.j+h.e}T (${p(h.i+h.j+h.e)}%)\n다. 대선주조: ${d.c+d.b+d.e}T (${p(d.c+d.b+d.e)}%)\n라. 롯데: ${l.s+l.c+l.e}T (${p(l.s+l.c+l.e)}%)\n\n`;
-                r += `2. 전환 및 추가주문\n\n가. 근무인원 및 판매\n${salesTxt}\n`;
-                r += `나. 총 전환: ${t_j}t(좋은데이) / ${t_g}t(부산갈매기) / ${t_t}t(톡톡)\n${transTxt}\n`;
-                r += `다. 총 추가주문: ${a_j}t(좋은데이) / ${a_g}t(부산갈매기) / ${a_t}t(톡톡)\n${addTxt}\n`;
-                r += `3. 타사 활동\n- 하이트진로: ${document.getElementById('act_hite').value}\n- 대선주조: ${document.getElementById('act_daesun').value}\n- 롯데주류: ${document.getElementById('act_lotte').value}\n\n`;
-                r += `4. 특이사항\n- ${document.getElementById('memo').value}`;
-
-                document.getElementById('final_report').innerText = r;
-                return r;
-            } catch(e) { 
-                alert("오류 발생: " + e.message); 
-                return null; 
-            }
-        }
-    </script>
+    }
+</script>
 </body>
 </html>
