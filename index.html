@@ -137,75 +137,75 @@
         document.body.removeChild(textArea);
     }
 
-    function generateReport() {
-        try {
-            const now = new Date();
-            const days = ['일','월','화','수','목','금','토'];
-            const dateStr = `${now.getMonth()+1}월 ${now.getDate()}일(${days[now.getDay()]})`;
-            const area = document.getElementById('area_name').value;
+ function generateReport() {
+    try {
+        const now = new Date();
+        const days = ['일','월','화','수','목','금','토'];
+        const dateStr = `${now.getMonth()+1}월 ${now.getDate()}일(${days[now.getDay()]})`;
+        const area = document.getElementById('area_name').value;
 
-            const v = (id) => Number(document.getElementById(id).value || 0);
+        const v = (id) => Number(document.getElementById(id).value || 0);
 
-            // 1. 점유비 데이터 수집
-            const m = { g: v('m_good'), t: v('m_tok'), ga: v('m_gal'), e: v('m_etc') };
-            const h = { i: v('h_isul'), j: v('h_jinro'), e: v('h_etc') };
-            const d = { c: v('d_daesun'), b: v('d_busan'), e: v('d_etc') };
-            const l = { s: v('l_saero'), c: v('l_chungha'), e: v('l_etc') };
-            const etcTotal = v('etc_total');
+        const m = { g: v('m_good'), t: v('m_tok'), ga: v('m_gal'), e: v('m_etc') };
+        const h = { i: v('h_isul'), j: v('h_jinro'), e: v('h_etc') };
+        const d = { c: v('d_daesun'), b: v('d_busan'), e: v('d_etc') };
+        const l = { s: v('l_saero'), c: v('l_chungha'), e: v('l_etc') };
+        const etcTotal = v('etc_total');
 
-            const m_sum = m.g + m.t + m.ga + m.e;
-            const h_sum = h.i + h.j + h.e;
-            const d_sum = d.c + d.b + d.e;
-            const l_sum = l.s + l.c + l.e;
-            const total_T = m_sum + h_sum + d_sum + l_sum + etcTotal;
+        const m_sum = m.g + m.t + m.ga + m.e;
+        const h_sum = h.i + h.j + h.e;
+        const d_sum = d.c + d.b + d.e;
+        const l_sum = l.s + l.c + l.e;
+        const total_T = m_sum + h_sum + d_sum + l_sum + etcTotal;
 
-            const p = (v) => total_T > 0 ? (v / total_T * 100).toFixed(1) : "0.0";
+        const p = (v) => total_T > 0 ? (v / total_T * 100).toFixed(1) : "0.0";
 
-            // 2. 인원 판매량 및 전환 내역 합산 (변수 선언 필수)
-            let workerSalesTxt = "";
-            let transSummaryTxt = "";
-            let addSummaryTxt = "";
-            let total_t_j=0, total_t_g=0, total_t_t=0;
-            let total_a_j=0, total_a_g=0, total_a_t=0;
+        let workerSalesTxt = "";
+        let transSummaryTxt = "";
+        let addSummaryTxt = "";
+        let total_t_j=0, total_t_g=0, total_t_t=0;
+        let total_a_j=0, total_a_g=0, total_a_t=0;
 
-            document.querySelectorAll('.worker-item').forEach(el => {
-                const name = el.querySelector('.worker-name').value || "미입력";
-                const tj = Number(el.querySelector('.t-good').value || 0);
-                const tg = Number(el.querySelector('.t-gal').value || 0);
-                const tt = Number(el.querySelector('.t-tok').value || 0);
-                const aj = Number(el.querySelector('.a-good').value || 0);
-                const ag = Number(el.querySelector('.a-gal').value || 0);
-                const at = Number(el.querySelector('.a-tok').value || 0);
+        document.querySelectorAll('.worker-item').forEach(el => {
+            const name = el.querySelector('.worker-name').value || "미입력";
+            const tj = Number(el.querySelector('.t-good').value || 0); // 전환 좋은데이
+            const tg = Number(el.querySelector('.t-gal').value || 0);  // 전환 갈매기
+            const tt = Number(el.querySelector('.t-tok').value || 0);  // 전환 톡톡
+            const aj = Number(el.querySelector('.a-good').value || 0); // 추가 좋은데이
+            const ag = Number(el.querySelector('.a-gal').value || 0);  // 추가 갈매기
+            const at = Number(el.querySelector('.a-tok').value || 0);  // 추가 톡톡
 
-                total_t_j += tj; total_t_g += tg; total_t_t += tt;
-                total_a_j += aj; total_a_g += ag; total_a_t += at;
-                
-                workerSalesTxt += `${name} : ${tj+tg+tt+aj+ag+at}본\n`;
-                transSummaryTxt += `${name}: ${tj}t(좋은데이) / ${tg}t(부산갈매기) / ${tt}t(톡톡)\n`;
-                addSummaryTxt += `${name}: ${aj}t(좋은데이) / ${ag}t(부산갈매기) / ${at}t(톡톡)\n`;
-            });
+            total_t_j += tj; total_t_g += tg; total_t_t += tt;
+            total_a_j += aj; total_a_g += ag; total_a_t += at;
+            
+            // 핵심 수정: 갈매기(tg, ag) 수량만 합산
+            const galTotal = tg + ag; 
+            workerSalesTxt += `${name} : ${galTotal}본\n`;
 
-            // 3. 최종 양식 조립
-            let r = `< ${dateStr} ${area} 상권 보고 >\n\n`;
-            r += `1. 점유비\n- 총 방문업소: ${v('total_shops')}개\n- 총 테이블 수: ${total_T}T\n\n`;
-            r += `가. 무학: ${m_sum}T (${p(m_sum)}%)\n- 좋은데이: ${m.g}T (${p(m.g)}%)\n- 톡시리즈: ${m.t}T (${p(m.t)}%)\n- 부산갈매기: ${m.ga}T (${p(m.ga)}%)\n- 기타: ${m.e}T (${p(m.e)}%)\n\n`;
-            r += `나. 하이트진로: ${h_sum}T (${p(h_sum)}%)\n- 참이슬: ${h.i}T (${p(h.i)}%)\n- 진로: ${h.j}T (${p(h.j)}%)\n- 기타: ${h.e}T (${p(h.e)}%)\n\n`;
-            r += `다. 대선주조: ${d_sum}T (${p(d_sum)}%)\n- 대선(C1 포함): ${d.c}T (${p(d.c)}%)\n- 부산: ${d.b}T (${p(d.b)}%)\n- 기타: ${d.e}T (${p(d.e)}%)\n\n`;
-            r += `라. 롯데: ${l_sum}T (${p(l_sum)}%)\n- 새로(살구 포함): ${l.s}T (${p(l.s)}%)\n- 청하(별빛청하 포함): ${l.c}T (${p(l.c)}%)\n- 기타: ${l.e}T (${p(l.e)}%)\n\n`;
-            r += `마. 기타 주류회사: ${etcTotal}T (${p(etcTotal)}%)\n※ 별도 제품 확인 시 항목 추가 입력\n\n`;
-            r += `2. 전환 및 추가주문\n\n가. 근무인원\n\n부산 갈매기 총 판매 병 수\n${workerSalesTxt}\n`;
-            r += `나. 총 전환: ${total_t_j}t(좋은데이) / ${total_t_g}t(부산갈매기) / ${total_t_t}t(톡톡)\n${transSummaryTxt}\n`;
-            r += `다. 총 추가주문: ${total_a_j}t(좋은데이) / ${total_a_g}t(부산갈매기) / ${total_a_t}t(톡톡)\n${addSummaryTxt}\n`;
-            r += `3. 타사 활동\n- 하이트진로: ${document.getElementById('act_hite').value}\n- 대선주조: ${document.getElementById('act_daesun').value}\n- 롯데주류: ${document.getElementById('act_lotte').value}\n\n`;
-            r += `4. 특이사항\n- ${document.getElementById('memo').value}`;
+            transSummaryTxt += `${name}: ${tj}t(좋은데이) / ${tg}t(부산갈매기) / ${tt}t(톡톡)\n`;
+            addSummaryTxt += `${name}: ${aj}t(좋은데이) / ${ag}t(부산갈매기) / ${at}t(톡톡)\n`;
+        });
 
-            document.getElementById('final_report').innerText = r;
-            return r;
-        } catch(e) { 
-            alert("오류 발생: " + e.message); 
-            return null; 
-        }
+        let r = `< ${dateStr} ${area} 상권 보고 >\n\n`;
+        r += `1. 점유비\n- 총 방문업소: ${v('total_shops')}개\n- 총 테이블 수: ${total_T}T\n\n`;
+        r += `가. 무학: ${m_sum}T (${p(m_sum)}%)\n- 좋은데이: ${m.g}T (${p(m.g)}%)\n- 톡시리즈: ${m.t}T (${p(m.t)}%)\n- 부산갈매기: ${m.ga}T (${p(m.ga)}%)\n- 기타: ${m.e}T (${p(m.e)}%)\n\n`;
+        r += `나. 하이트진로: ${h_sum}T (${p(h_sum)}%)\n- 참이슬: ${h.i}T (${p(h.i)}%)\n- 진로: ${h.j}T (${p(h.j)}%)\n- 기타: ${h.e}T (${p(h.e)}%)\n\n`;
+        r += `다. 대선주조: ${d_sum}T (${p(d_sum)}%)\n- 대선(C1 포함): ${d.c}T (${p(d.c)}%)\n- 부산: ${d.b}T (${p(d.b)}%)\n- 기타: ${d.e}T (${p(d.e)}%)\n\n`;
+        r += `라. 롯데: ${l_sum}T (${p(l_sum)}%)\n- 새로(살구 포함): ${l.s}T (${p(l.s)}%)\n- 청하(별빛청하 포함): ${l.c}T (${p(l.c)}%)\n- 기타: ${l.e}T (${p(l.e)}%)\n\n`;
+        r += `마. 기타 주류회사: ${etcTotal}T (${p(etcTotal)}%)\n※ 별도 제품 확인 시 항목 추가 입력\n\n`;
+        r += `2. 전환 및 추가주문\n\n가. 근무인원\n\n부산 갈매기 총 판매 병 수\n${workerSalesTxt}\n`;
+        r += `나. 총 전환: ${total_t_j}t(좋은데이) / ${total_t_g}t(부산갈매기) / ${total_t_t}t(톡톡)\n${transSummaryTxt}\n`;
+        r += `다. 총 추가주문: ${total_a_j}t(좋은데이) / ${total_a_g}t(부산갈매기) / ${total_a_t}t(톡톡)\n${addSummaryTxt}\n`;
+        r += `3. 타사 활동\n- 하이트진로: ${document.getElementById('act_hite').value}\n- 대선주조: ${document.getElementById('act_daesun').value}\n- 롯데주류: ${document.getElementById('act_lotte').value}\n\n`;
+        r += `4. 특이사항\n- ${document.getElementById('memo').value}`;
+
+        document.getElementById('final_report').innerText = r;
+        return r;
+    } catch(e) { 
+        alert("오류 발생: " + e.message); 
+        return null; 
     }
+}
 </script>
 </body>
 </html>
