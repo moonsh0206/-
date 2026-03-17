@@ -12,6 +12,8 @@
         .card { background: white; padding: 1.2rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); margin-bottom: 1rem; }
         .section-title { font-weight: bold; font-size: 14px; margin-bottom: 8px; display: block; color: #1e40af; }
         button:active { transform: scale(0.98); opacity: 0.9; }
+        .delete-btn { color: #ef4444; font-weight: bold; padding: 0 8px; cursor: pointer; transition: opacity 0.2s; }
+    .delete-btn:hover { opacity: 0.7; }
     </style>
 </head>
 <body class="bg-gray-50 p-3 max-w-md mx-auto text-gray-800 pb-20 font-sans">
@@ -102,18 +104,22 @@
     </div>
 
 <script>
-    function addWorker() {
-        const container = document.getElementById('worker_list');
-        const div = document.createElement('div');
-        div.className = "worker-item border-b border-orange-200 pb-3 mt-3";
-        div.innerHTML = `
-            <input type="text" placeholder="근무자 이름" class="worker-name font-bold mb-2 w-24 text-left border-none bg-white px-1 shadow-sm rounded">
-            <div class="grid grid-cols-2 gap-2 text-[10px]">
-                <div>[전환] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
-                <div>[추가] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
-            </div>`;
-        container.appendChild(div);
-    }
+function addWorker() {
+    const container = document.getElementById('worker_list');
+    const div = document.createElement('div');
+    // 'worker-item' 클래스를 가진 div가 생성됩니다.
+    div.className = "worker-item border-b border-orange-200 pb-3 mt-3 relative";
+    div.innerHTML = `
+        <div class="flex justify-between items-center mb-2">
+            <input type="text" placeholder="근무자 이름" class="worker-name font-bold w-24 text-left border-none bg-white px-1 shadow-sm rounded">
+            <button onclick="this.parentElement.parentElement.remove()" class="delete-btn text-xs">✕ 삭제</button>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[10px]">
+            <div>[전] 좋:<input type="number" class="w-6 t-good" value="0"> 갈:<input type="number" class="w-6 t-gal" value="0"> 톡:<input type="number" class="w-6 t-tok" value="0"></div>
+            <div>[추] 좋:<input type="number" class="w-6 a-good" value="0"> 갈:<input type="number" class="w-6 a-gal" value="0"> 톡:<input type="number" class="w-6 a-tok" value="0"></div>
+        </div>`;
+    container.appendChild(div);
+}
 
     function handleCopy() {
         const report = generateReport();
